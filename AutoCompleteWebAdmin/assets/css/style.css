@@ -1,0 +1,30 @@
+.FieldLabel {
+    clear: none;
+    float: left;
+    margin: 3px 20px 0 0;
+    position: relative;
+    text-align: left;
+    width: 97px;
+}
+
+.lineBreakField {
+    border: medium none;
+    clear: both;
+    display: block;
+    float: none;
+    font-size: 0;
+    height: 4px;
+    margin: 0;
+    overflow: hidden;
+    padding: 0;
+}
+
+.ButtonGroup {
+    clear: none;
+    float: left;
+    position: relative;
+    text-align: left;
+}
+.rgHeader {
+padding-bottom:5px;
+}

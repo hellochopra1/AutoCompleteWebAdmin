@@ -1,0 +1,314 @@
+﻿<%@ Master Language="C#" AutoEventWireup="true" CodeBehind="DashBoard.master.cs"  Inherits="CraiglistWeb.DashBoard" %>
+
+<!DOCTYPE html>
+
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head runat="server">
+    <meta charset="utf-8" />
+    <title>AutoComplete Admin</title>
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta content="width=device-width, initial-scale=1" name="viewport" />
+    <meta content="" name="description" />
+    <meta content="" name="author" />
+    <!-- BEGIN GLOBAL MANDATORY STYLES -->
+    <link href="http://fonts.googleapis.com/css?family=Open+Sans:400,300,600,700&subset=all" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/font-awesome.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/simple-line-icons.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/bootstrap.min.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/uniform.default.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/bootstrap-switch.min.css" rel="stylesheet" type="text/css" />
+    <!-- END GLOBAL MANDATORY STYLES -->
+    <!-- BEGIN THEME STYLES -->
+    <link href="/assets/css/components.css" id="style_components" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/plugins.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/layout.css" rel="stylesheet" type="text/css" />
+    <link href="/assets/css/darkblue.css" rel="stylesheet" type="text/css" id="style_color" />
+    <link href="/assets/css/custom.css" rel="stylesheet" type="text/css" />
+    <!-- END THEME STYLES -->
+    <link rel="shortcut icon" href="favicon.ico" />
+    <asp:ContentPlaceHolder ID="head" runat="server">
+    </asp:ContentPlaceHolder>
+    <script src="http://code.jquery.com/jquery-1.7.2.js"></script>
+
+    <script src="/assets/js/jquery.min.js" type="text/javascript"></script>
+    <script src="/assets/js/jquery-migrate.min.js" type="text/javascript"></script>
+    <!-- IMPORTANT! Load jquery-ui-1.10.3.custom.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
+    <script src="/assets/js/jquery-ui-1.10.3.custom.min.js" type="text/javascript"></script>
+    <script src="/assets/js/bootstrap.min.js" type="text/javascript"></script>
+    <script src="/assets/js/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+    <script src="/assets/js/jquery.slimscroll.min.js" type="text/javascript"></script>
+    <script src="/assets/js/jquery.blockui.min.js" type="text/javascript"></script>
+    <script src="/assets/js/jquery.uniform.min.js" type="text/javascript"></script>
+    <script src="/assets/js/bootstrap-switch.min.js" type="text/javascript"></script>
+    <script src="assets/js/bootstrap-switch.min.js"></script>
+    <script src="assets/js/metronic.js"></script>
+
+    <script src="assets/js/quick-sidebar.js"></script>
+
+
+    <script src="assets/js/metronic.js" type="text/javascript"></script>
+    <script src="assets/js/layout.js" type="text/javascript"></script>
+    <script src="assets/js/quick-sidebar.js" type="text/javascript"></script>
+    <script src="assets/js/demo.js" type="text/javascript"></script>
+    <script src="assets/js/index.js" type="text/javascript"></script>
+    <script src="assets/js/tasks.js" type="text/javascript"></script>
+
+
+
+    <script type='text/javascript'>
+        //$(document).ready(function () {
+        //    $('#mymenu ul li').click(function () {
+        //        var q = $(this).attr('id');
+        //        if (document.getElementById("Hidden1").value != q) {
+        //            document.getElementById("Hidden1").value = q;
+        //            alert(q);
+        //        }
+        //        //$('li.active').removeClass('active');
+        //        //$(this).addClass('active');
+        //    });
+        //});
+
+        //function changeclass(id) {
+        //    if (document.getElementById("hdVal").value != id) {
+        //       // document.getElementById("hdVal").value = id;
+        //    }
+        //    //var qt = document.getElementById("hdVal").value;
+        //    alert(id);
+        //    $(this).addClass('start');
+        //    $(this).addClass('active');
+        //    $(this).addClass('open');
+        //}
+    </script>
+    <style>
+        @media screen and (max-width: 650px) {
+
+            .js .main-nav {
+                height: auto;
+            }
+
+                .js .main-nav .menu {
+                    display: block;
+                }
+
+                .js .main-nav .menu {
+                    top: 0;
+                    position: relative;
+                }
+        }
+    </style>
+
+</head>
+<!-- END HEAD -->
+<!-- BEGIN BODY -->
+<!-- DOC: Apply "page-header-fixed-mobile" and "page-footer-fixed-mobile" class to body element to force fixed header or footer in mobile devices -->
+<!-- DOC: Apply "page-sidebar-closed" class to the body and "page-sidebar-menu-closed" class to the sidebar menu element to hide the sidebar by default -->
+<!-- DOC: Apply "page-sidebar-hide" class to the body to make the sidebar completely hidden on toggle -->
+<!-- DOC: Apply "page-sidebar-closed-hide-logo" class to the body element to make the logo hidden on sidebar toggle -->
+<!-- DOC: Apply "page-sidebar-hide" class to body element to completely hide the sidebar on sidebar toggle -->
+<!-- DOC: Apply "page-sidebar-fixed" class to have fixed sidebar -->
+<!-- DOC: Apply "page-footer-fixed" class to the body element to have fixed footer -->
+<!-- DOC: Apply "page-sidebar-reversed" class to put the sidebar on the right side -->
+<!-- DOC: Apply "page-full-width" class to the body element to have full width page without the sidebar menu -->
+<body class="page-header-fixed page-quick-sidebar-over-content page-sidebar-closed-hide-logo  page-container-bg-solid">
+    <form id="form1" runat="server">
+        <asp:ScriptManager ID="ScriptManager" runat="server">
+            <Services>
+                <asp:ServiceReference Path="~/WebService/AutoCompleteOMST.asmx" />
+                <asp:ServiceReference Path="~/WCFService/MyWCFService.svc" />
+            </Services>
+        </asp:ScriptManager>
+        <!-- BEGIN HEADER -->
+        <input type="hidden" value="" id="hdVal" />
+        <input type="hidden" value="" id="Hidden1" />
+        <div class="page-header navbar navbar-fixed-top">
+            <!-- BEGIN HEADER INNER -->
+            <div class="page-header-inner">
+                <!-- BEGIN LOGO -->
+                <div class="page-logo">
+
+                    <div class="menu-toggler sidebar-toggler hide">
+                    </div>
+                </div>
+                <!-- END LOGO -->
+                <!-- BEGIN RESPONSIVE MENU TOGGLER -->
+                <a href="javascript:;" class="menu-toggler responsive-toggler" data-toggle="collapse" data-target=".navbar-collapse"></a>
+                <!-- END RESPONSIVE MENU TOGGLER -->
+                <!-- BEGIN TOP NAVIGATION MENU -->
+                <div style="display:none;" class="top-menu">
+                    <ul class="nav navbar-nav pull-right">
+                        <!-- BEGIN USER LOGIN DROPDOWN -->
+                        <!-- DOC: Apply "dropdown-dark" class after below "dropdown-extended" to change the dropdown styte -->
+                        <li  class="dropdown dropdown-user">
+                            <a href="#" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
+                                <asp:Image ID="Image1" runat="server" CssClass="img-circle" />
+                                <asp:HiddenField ID="HiddenField1" runat="server" />
+                                <span class="username username-hide-on-mobile">
+                                    <asp:Label ID="lbOnline" runat="server" Text="Label"></asp:Label></span>
+                                <i class="fa fa-angle-down"></i>
+                            </a>
+                            <ul class="dropdown-menu dropdown-menu-default">
+                                <%--<li>
+                                    <a href="Profile.aspx">
+                                        <i class="icon-user"></i>My Profile </a>
+                                </li>--%>
+                                <%-- <li>
+                                    <a href="#">
+                                        <i class="icon-envelope-open"></i>My Inbox<span class="badge badge-danger">3</span>
+                                    </a>
+                                </li>--%>
+                                <li class="divider"></li>
+                                <li>
+                                    <asp:LinkButton ID="LinkButton1" runat="server" OnClick="btn_logout_Click"><i class="icon-logout"></i>LogOut</asp:LinkButton>
+                                </li>
+                            </ul>
+                        </li>
+                        <!-- END USER LOGIN DROPDOWN -->
+                    </ul>
+                </div>
+                <!-- END TOP NAVIGATION MENU -->
+            </div>
+            <!-- END HEADER INNER -->
+        </div>
+        <!-- END HEADER -->
+        <div class="clearfix">
+        </div>
+        <!-- BEGIN CONTAINER -->
+        <div class="page-container">
+            <!-- BEGIN SIDEBAR -->
+            <div class="page-sidebar-wrapper">
+                <!-- DOC: Set data-auto-scroll="false" to disable the sidebar from auto scrolling/focusing -->
+                <!-- DOC: Change data-auto-speed="200" to adjust the sub menu slide up/down speed -->
+                <div class="page-sidebar navbar-collapse collapse" id="mymenu">
+                    <!-- BEGIN SIDEBAR MENU -->
+                    <ul class="page-sidebar-menu page-sidebar-menu-hover-submenu" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
+                        <li class="sidebar-toggler-wrapper">
+
+                            <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
+                            <div class="sidebar-toggler">
+                            </div>
+                            <!-- END SIDEBAR TOGGLER BUTTON -->
+
+                        </li>
+                        <li class="sidebar-search-wrapper">
+                            <!-- BEGIN RESPONSIVE QUICK SEARCH FORM -->
+                            <div class="sidebar-search ">
+                                <a href="javascript:;" class="remove">
+                                    <i class="icon-close"></i>
+                                </a>
+                            </div>
+                            <!-- END RESPONSIVE QUICK SEARCH FORM -->
+                        </li>
+                        <li class="" runat="server" id="dashboard1" onclick="changeclass(dashboard1);">
+                            <a href="KeywordMasterForTesting.aspx">
+                                <i class="icon-home"></i>
+                                <span class="title">Keyword Master</span>
+                                <span class="selected"></span>
+                                <span class="arrow open"></span>
+                            </a>
+                        </li>
+                         <li class="" runat="server" id="googleSettings" onclick="changeclass(googleSettings);" >
+                            <a href="GoogleSettings.aspx">
+                                <i class="icon-settings"></i>
+                                <span class="title">Google Settings</span>
+                                <span class="selected"></span>
+                                <span class="arrow open"></span>
+                            </a>
+                        </li>
+                         <li class="" runat="server" id="bingSettings" onclick="changeclass(bingSettings);" >
+                            <a href="BingSettings.aspx">
+                                <i class="icon-settings"></i>
+                                <span class="title">Bing Settings</span>
+                                <span class="selected"></span>
+                                <span class="arrow open"></span>
+                            </a>
+                        </li>
+                        <li class="" runat="server" id="dashboard" onclick="changeclass(dashboard);" >
+                            <a href="KeywordMaster.aspx">
+                                <i class="icon-diamond"></i>
+                                <span class="title">Keyword Master Testing</span>
+                                <span class="selected"></span>
+                                <span class="arrow open"></span>
+                            </a>
+                        </li>
+                        <li class="" runat="server" id="youtube" onclick="changeclass(youtube);">
+                            <a href="YoutubeMaster.aspx">
+                                <i class="icon-diamond"></i>
+                                <span class="title">Youtube Master Testing</span>
+                                <span class="selected"></span>
+                                <span class="arrow open"></span>
+                            </a>
+                        </li>
+                        <li id="CompanyMaster" runat="server" onclick="changeclass('CompanyMaster');">
+                            <a href="CompanyMaster.aspx">
+                                <i class="icon-pointer"></i>
+                                <span class="title">Company Master</span>
+                                <span class="arrow"></span>
+                                <span class="arrow open"></span>
+                                <span class="selected"></span>
+                            </a>
+                        </li>
+                        <li id="IPMaster" runat="server" style="display: none;" onclick="changeclass('IPMaster');">
+                            <a href="ProxyMaster.aspx">
+                                <i class="icon-diamond"></i>
+                                <span class="title">IP Master</span>
+                                <span class="arrow"></span>
+                                <span class="arrow open"></span>
+                                <span class="selected"></span>
+                            </a>
+                        </li>
+                        <li id="Li1" runat="server" onclick="javascript:SaveWithParameter();" >
+                            <a>
+                                <i class="icon-logout"></i>
+                                <span class="title">
+                                    Log Out
+                                    <asp:Button ID="btn_logout" Visible="false" runat="server" Text="Log Out" OnClick="btn_logout_Click" CssClass="title" BackColor="#364150" BorderColor="#364150" BorderStyle="None" />
+                                </span>
+                                <span class="arrow"></span>
+                                <span class="arrow open"></span>
+                                <span class="selected"></span>
+                            </a>
+                        </li>
+                    </ul>
+                    <!-- END SIDEBAR MENU -->
+                </div>
+            </div>
+            <script type="text/javascript">
+                function SaveWithParameter() {
+                    __doPostBack('<%= btn_logout.UniqueID %>', "OnClick");
+                }
+</script>
+            <!-- END SIDEBAR -->
+            <!-- BEGIN CONTENT -->
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    <div>
+                        <asp:ContentPlaceHolder ID="ContentPlaceHolder1" runat="server">
+                        </asp:ContentPlaceHolder>
+                    </div>
+                </div>
+            </div>
+            <!-- END CONTENT -->
+        </div>
+        <!-- END CONTAINER -->
+        <!-- BEGIN FOOTER -->
+        <div class="page-footer">
+            <div class="page-footer-inner">
+                2014 &copy; OMST Technologies.
+            </div>
+            <div class="scroll-to-top">
+                <i class="icon-arrow-up"></i>
+            </div>
+        </div>
+        <!-- END FOOTER -->
+        <!-- BEGIN CORE PLUGINS -->
+        <!--[if lt IE 9]>
+    <script src="/assets/js/respond.min.js"></script>
+    <script src="/assets/js/excanvas.min.js"></script> 
+    <![endif]-->
+
+        <!-- END CORE PLUGINS -->
+        <!-- END JAVASCRIPTS -->
+    </form>
+</body>
+<!-- END BODY -->
+</html>
